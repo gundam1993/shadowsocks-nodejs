@@ -57,9 +57,9 @@ class LRUCache {
   sweep() {
     utils.debug("sweeping")
     let dict = this.dict
-    let keys = Object.keys(dict)
+    // let keys = Object.keys(dict)
     let swept = 0
-    for (let k in keys) {
+    for (let k in dict) {
       let v = dict[k]
       let diff = process.hrtime(v[1])
       if (diff[0] > (this.timeout * 0.001)) {
@@ -178,7 +178,7 @@ exports.createServer = (listenAddr, listenPort, remoteAddr, remotePort, password
     listenIPType = net.isIP(listenAddr)
     listenIPType === 6 ? udpTypesToListen.push('udp6') : udpTypesToListen.push('udp4')
   }
-  for (let udpTypeToListen in udpTypesToListen) {
+  for (let udpTypeToListen of udpTypesToListen) {
     server = dgram.createSocket(udpTypeToListen)
     clients = new LRUCache(timeout, 10 * 1000)
     
