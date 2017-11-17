@@ -352,9 +352,9 @@ exports.main = () => {
       }
     }
   }
-    
+  
   if (configPath) {
-    utils.info(`loading config from${configPath}`)
+    utils.info(`loading config from ${configPath}`)
     configContent = fs.readFileSync(configPath)
     try {
       config = JSON.parse(configContent)
@@ -372,7 +372,7 @@ exports.main = () => {
   if (config.verbose) {
     utils.config(utils.DEBUG)    
   }
-
+  
   utils.checkConfig(config)
   SERVER = config.server
   REMOTE_PORT = config.server_port
@@ -380,9 +380,10 @@ exports.main = () => {
   KEY = config.password
   METHOD = config.method
   local_address = config.local_address
-  if (!(SERVER && REMOTE_PORT && PORT && KEY))
+  if (!(SERVER && REMOTE_PORT && PORT && KEY)) {
     utils.warn('config.json not found, you have to specify all config in commandline')
     process.exit(1)
+  }
   timeout = Math.floor(config.timeout * 1000) || 600000
   s = createServer(SERVER, REMOTE_PORT, PORT, KEY, METHOD, timeout, local_address)
   s.on("error", (e) => {

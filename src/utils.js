@@ -20,8 +20,8 @@
  */
 
 
-util = require('util')
-pack = require('../../package.json')
+const util = require('util')
+const pack = require('../package.json')
 
 const printLocalHelp = () => {
     console.log(`usage: sslocal [-h] -s SERVER_ADDR -p SERVER_PORT [-b LOCAL_ADDR] -l LOCAL_PORT -k PASSWORD -m METHOD [-t TIMEOUT] [-c config]
@@ -128,7 +128,7 @@ exports.error = (msg) => (exports.log(exports.ERROR,  (msg != null ? msg.stack :
 exports.inetNtoa = (buf) => (`${buf[0]}.${buf[1]}.${buf[2]}.${buf[3]}`)
   
 exports.inetAton = (ipStr) => {
-  ;et parts = ipStr.split(".")
+  let parts = ipStr.split(".")
   if (parts.length !== 4) {
     return null
   } else {
